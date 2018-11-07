@@ -4,11 +4,11 @@ This tutorial introduces JSONiq to Python users by directly comparing the langua
 
 What is presented here is not only the core JSONiq language, which is purely declarative and functional, but also its Update Facility extension, to modify JSON documents, as well as its Scripting extension, which supports imperative features such as variable assignment, side effects and while loops.
 
-##Using JSONiq as a calculator
+## Using JSONiq as a calculator
 
 First, JSONiq can be used as a calculator like Python.
 
-The basic arithmetic operations available are similar (+, *, -) except that the division is done with *div* rather than /.
+The basic arithmetic operations available are similar (+, *, -) except that the division is done with *div* rather than /. Integer division is done with *idiv* rather than //. 
 
     2 + 2
     
