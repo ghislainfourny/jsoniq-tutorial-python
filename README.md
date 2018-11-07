@@ -8,10 +8,18 @@ What is presented here is not only the core JSONiq language, which is purely dec
 
 First, JSONiq can be used as a calculator like Python.
 
+### Basic arithmetics
+
 The basic arithmetic operations available are similar (+, *, -) except that the division is done with *div* rather than /. Integer division is done with *idiv* rather than //. 
+
+Powers are done with the pow() function rather than **.
 
     2 + 2
     
     (50 - 5*6) div 4
     
-Like Python, JSONiq supports the entire set of integers. Literals such as 4 and 345 are of the integer type, corresponding to Python ints. Literals such as 4.3 and 345.235423 are of the decimal type, which supports the entire set of decimals, with no correspondence in Python. Literals in scientific notation such as 345.23e34 are of the double type, corresponding to Python floats.
+    pow(10, 3)
+    
+### Number types
+
+Like Python, JSONiq supports the entire set of integers. Literals such as 4 and 345 are of the integer type, corresponding to Python ints. Literals such as 4.3 and 345.235423 are of the decimal type, which supports the entire set of decimals, like Python Decimals. Literals in scientific notation such as 345.23e34 are of the double type, corresponding to Python floats.
