@@ -97,3 +97,31 @@ JSONiq has a rich function library to manipulate strings. Range slice indexes, i
     tokenize("This is a string", " ")
    
 There are also regex functions such as matches and replace.
+
+## Sequences
+
+The JSONiq counterpart of Python lists is probably sequences. Sequences are a first-class citizen in JSONiq, in the sense that any value, anywhere, returned or taken by an expression, is a sequence. Even if there is only one integer, or one string, it is still a sequence of one integer, or a sequence of one string.
+
+Sequences can be built using comma separators. Sequences are so important in JSONiq that no special braces or brackets are needed. Surrounding them with parentheses is common though, in order to override precedence of expressions here and there.
+
+    1, 2, 3, 4, 5, 6
+    
+or equivalently:
+
+    (1, 2, 3, 4, 5, 6)
+
+Even though integer ranges can be built faster with the "to" operator:
+
+    1 to 10000
+    
+Looking up elements in a sequence by position is similar to python. In JSONiq we start counting at 1, i.e., the first item in a sequence is obtained with [1].
+
+    variable $sequence := 1 to 10000;
+    $sequence[10]
+    
+Slices can also be taken using the position() and last() functions:
+
+    variable $sequence := 1 to 10000;
+    $sequence[position() <= 10]
+    $sequence[position() <= last() - 30]
+    
