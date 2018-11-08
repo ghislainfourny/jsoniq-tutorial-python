@@ -72,6 +72,8 @@ This also works with variables.
     $str := $str || "a string.";
     $str
     
+Like in Python, strings are immutable. Changes to strings must be done by reassigning values to variables.
+    
 JSONiq has a rich function library to manipulate strings. Range slice indexes, in particular, use the substring() function in JSONiq.
 
     substring("String", 3, 1)
