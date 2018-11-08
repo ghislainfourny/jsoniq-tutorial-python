@@ -123,15 +123,24 @@ Looking up elements in a sequence by position is similar to python. In JSONiq we
     
 Slices can also be taken using the position() and last() functions:
 
-    variable $sequence := 1 to 10000;
+    variable $sequence := ;
     $sequence[position() <= 10]
-    $sequence[position() <= last() - 30]
+
+    (1 to 10000)[position() <= last() - 30]
     
 Sequences are flat: concatenation is thus also performed with a comma operator (in Python, this would be a +):
 
     variable $sequence1 := 1 to 10000;
     variable $sequence2 := 1 to 10000;
     ($sequence1, $sequence2)
+
+For example,
+
+    ((1, 2, 3), (4, 5, 6))
+    
+is the same as
+
+    1, 2, 3, 4, 5, 6
     
 Sequences, like JSONiq strings, are immutable. Changes are always copied over to a new sequence. This is different from Python lists, which are mutable.
 
