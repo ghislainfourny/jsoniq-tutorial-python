@@ -123,7 +123,7 @@ Looking up elements in a sequence by position is similar to python. In JSONiq we
     
 Slices can also be taken using the position() and last() functions:
 
-    variable $sequence := ;
+    variable $sequence := 1 to 10000;
     $sequence[position() <= 10]
 
     (1 to 10000)[position() <= last() - 30]
@@ -148,7 +148,7 @@ The size of a sequence can be accessed with the count() function:
 
     count(2 to 3000)
     
-However, there are other aggregation operators available like sum(), average(), min() and max():
+However, there are other aggregation operators available like sum(), avg(), min() and max():
 
     min(2 to 3000)
 
@@ -156,9 +156,33 @@ However, there are other aggregation operators available like sum(), average(), 
 
     sum(2 to 3000)
 
-    average(2 to 3000)
+    avg(2 to 3000)
 
 
 ### Arrays
+
+JSONiq arrays are nothing else than JSON arrays. They are like sequences, except that they can nest and they are mutable.
+
+Arrays are surrounded with square brackets, like in JSON.
+
+    [ 1, 2, 3, 4, 5, 6 ]
+    
+    [ [ 1, 2, 3 ], 4, [ 5, 6 ] ]
+    
+Any sequence, that is, the result of any JSONiq expression, can be "boxed" into a JSON array by surrounding it with square brackets like so:
+
+    [ 1 to 2000 ]
+    
+Conversely, arrays can be "unboxed" to sequences with [] like so:
+
+    variable $x as array := [1, 2, 3, 4, 5, 6]
+    variable $y as integer+ := $x[]
+    
+Arrays can be updated in place using the JSONiq update facility:
+
+    variable $x as array := [1, 2, 3, 4, 5, 6];
+    insert json (3.1, 3.3, 3.7) into $x at position 4;
+    append json (7, 8, 9) into $x;
+    $x
 
 ### Objects
