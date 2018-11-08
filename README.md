@@ -48,4 +48,50 @@ In order to return/print a value, simply omit the last semi-colon (the last line
     $j := $j + 1;
     $j
     
+## Strings
+
+JSONiq strings are always enclosed with double quotes, not simple quotes.
+
+    "This is a string"
+
+Escaping is similar to Python and also JSON, with backslashes:
+
+    "This is a newline\nand an escaped \"quote\"."
     
+Strings are concatenated with the || operator or the concat() function. Sequences of strings can be concatenated with the string-join() function, possibly with a separator.
+
+    "This is " || "a string"
+    
+    concat("This is ", "a string")
+    
+    string-join(("This", "is", "a", "string"), " ")
+    
+This also works with variables.
+
+    variable $str := "This is ";
+    $str := $str || "a string.";
+    $str
+    
+JSONiq has a rich function library to manipulate strings:
+
+    substring("String", 3, 1)
+    
+    string-length("String")
+    
+    uppercase("String")
+    
+    lowercase("String")
+    
+    contains("String", "tr")
+    
+    starts-with("String", "S")
+    
+    ends-width("String", "g")
+    
+    substring-before("String", "i")
+    
+    substring-after("String", "i")
+   
+    tokenize("This is a string", " ")
+   
+There are also regex functions such as matches and replace.
