@@ -144,6 +144,21 @@ is the same as
     
 Sequences, like JSONiq strings, are immutable. Changes are always copied over to a new sequence. This is different from Python lists, which are mutable.
 
+The size of a sequence can be accessed with the count() function:
+
+    count(2 to 3000)
+    
+However, there are other aggregation operators available like sum(), average(), min() and max():
+
+    min(2 to 3000)
+
+    max(2 to 3000)
+
+    sum(2 to 3000)
+
+    average(2 to 3000)
+
+
 ### Arrays
 
 ### Objects
