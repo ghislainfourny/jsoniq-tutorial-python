@@ -169,6 +169,13 @@ Arrays are surrounded with square brackets, like in JSON.
     
     [ [ 1, 2, 3 ], 4, [ 5, 6 ] ]
     
+Items can be looked up in an array with [[ ]], like so:
+
+    variable $a := [ [ 1, 2, 3 ], 4, [ 5, 6 ] ];
+    $a[[1]]
+
+Note that if you use [1] (sequence lookup), this will output the array itself, because an array is the same as a sequence of one array, and the first element of that sequence is the array itself.
+
 Any sequence, that is, the result of any JSONiq expression, can be "boxed" into a JSON array by surrounding it with square brackets like so:
 
     [ 1 to 2000 ]
@@ -183,6 +190,8 @@ Arrays can be updated in place using the JSONiq update facility:
     variable $x as array := [1, 2, 3, 4, 5, 6];
     insert json (3.1, 3.3, 3.7) into $x at position 4;
     append json (7, 8, 9) into $x;
+    delete json $x[[2]];
+    replace value of json $x[[2]] with 10;
     $x
 
 ### Objects
