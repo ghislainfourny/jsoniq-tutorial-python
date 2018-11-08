@@ -72,7 +72,7 @@ This also works with variables.
     $str := $str || "a string.";
     $str
     
-JSONiq has a rich function library to manipulate strings:
+JSONiq has a rich function library to manipulate strings. Range slice indexes, in particular, use the substring() function in JSONiq.
 
     substring("String", 3, 1)
     
