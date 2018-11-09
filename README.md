@@ -98,9 +98,9 @@ Strings are concatenated with the || operator or the concat() function. Sequence
     
 This also works with variables.
 
-    variable $str := "This is ";
-    $str := $str || "a string.";
-    $str
+    let $str := "This is "
+    let $str := $str || "a string."
+    return $str
     
 Like in Python, strings are immutable. Changes to strings must be done by reassigning values to variables.
     
