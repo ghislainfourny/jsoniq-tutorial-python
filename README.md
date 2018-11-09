@@ -48,6 +48,36 @@ In order to return/print a value, simply omit the last semi-colon (the last line
     $j := $j + 1;
     $j
     
+### Variable bindings
+
+JSONiq is a functional language, which means that it also supports variable binding in a way similar to languages like Haskell and CAML. The code snippets from the previous paragraph can be rewritten as:
+
+    let $i := 1
+    let $i := $i + 1
+    return $i
+    
+And with type declarations:
+
+    let $i as integer := 1
+    let $i := $i + 1
+    let $j as decimal := 2.3
+    let $j := $j + 1
+    return $j
+    
+Variable bindings with let-return syntax are much preferrable to variable declaration and assignment, because more optimizations can be done by the underlying processor. There is another compelling reason: let-return constructs are themselves expressions, like arithmetics and logical expressions. Concretely, this means that they can be nested in further JSONiq expressions very easily:
+
+    let $k :=
+      count(
+        let $i as integer := 1
+        let $i := $i + 1
+        let $j as decimal := 2.3
+        let $j := $j + 1
+        return 1 to $j
+      )
+    return $k * $k
+    
+In the rest of the tutorial, we will thus prefer the let-return construct to variable assignments, but keeping in mind that they are equivalent in spirit.
+
 ## Strings
 
 JSONiq strings are always enclosed with double quotes, not simple quotes.
@@ -118,21 +148,21 @@ Even though integer ranges can be built faster with the "to" operator:
     
 Looking up elements in a sequence by position is similar to python. In JSONiq we start counting at 1, i.e., the first item in a sequence is obtained with [1].
 
-    variable $sequence := 1 to 10000;
-    $sequence[10]
+    let $sequence := 1 to 10000
+    return $sequence[10]
     
 Slices can also be taken using the position() and last() functions:
 
-    variable $sequence := 1 to 10000;
-    $sequence[position() <= 10]
+    let $sequence := 1 to 10000
+    return $sequence[position() <= 10]
 
     (1 to 10000)[position() <= last() - 30]
     
 Sequences are flat: concatenation is thus also performed with a comma operator (in Python, this would be a +):
 
-    variable $sequence1 := 1 to 10000;
-    variable $sequence2 := 1 to 10000;
-    ($sequence1, $sequence2)
+    let $sequence1 := 1 to 10000
+    let $sequence2 := 1 to 10000
+    return ($sequence1, $sequence2)
 
 For example,
 
@@ -171,8 +201,8 @@ Arrays are surrounded with square brackets, like in JSON.
     
 Items can be looked up in an array with [[ ]], like so:
 
-    variable $a := [ [ 1, 2, 3 ], 4, [ 5, 6 ] ];
-    $a[[1]]
+    let $a := [ [ 1, 2, 3 ], 4, [ 5, 6 ] ]
+    return $a[[1]]
 
 Note that if you use [1] (sequence lookup), this will output the array itself, because an array is the same as a sequence of one array, and the first element of that sequence is the array itself.
 
@@ -182,10 +212,11 @@ Any sequence, that is, the result of any JSONiq expression, can be "boxed" into 
     
 Conversely, arrays can be "unboxed" to sequences with [] like so:
 
-    variable $x as array := [1, 2, 3, 4, 5, 6]
-    variable $y as integer+ := $x[]
+    let $x as array := [1, 2, 3, 4, 5, 6]
+    let $y as integer+ := $x[]
+    return $y
     
-Arrays can be updated in place using the JSONiq update facility:
+Arrays can be updated in place using the JSONiq update facility and JSONiq scripting statements:
 
     variable $x as array := [1, 2, 3, 4, 5, 6];
     insert json (3.1, 3.3, 3.7) into $x at position 4;
