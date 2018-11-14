@@ -193,7 +193,7 @@ However, there are other aggregation operators available like sum(), avg(), min(
 
 JSONiq arrays are nothing else than JSON arrays. They are like sequences, except that they can nest and they are mutable.
 
-Arrays are surrounded with square brackets, like in JSON.
+Arrays are surrounded with square brackets, like in JSON -- actually, any well-formed JSON array can directly be copy-pasted into JSONiq.
 
     [ 1, 2, 3, 4, 5, 6 ]
     
@@ -226,3 +226,47 @@ Arrays can be updated in place using the JSONiq update facility and JSONiq scrip
     $x
 
 ### Objects
+
+JSONiq objects are nothing else than JSON objects: they map strings to any (single) value and these values can recursively be objects, arrays or atomics.
+
+Arrays are surrounded with curly braces, like in JSON -- actually, any well-formed JSON object can directly be copy-pasted into JSONiq.
+
+    { "foo" : "bar" }
+    
+    {
+      "foo" : [ { "a" : 1, "b": 2 } ],
+      "bar" : { "c" : true }
+    }
+    
+Items can be looked up in an object with a dot, like in Python:
+
+    let $a := {
+      "foo" : [ { "a" : 1, "b": 2 } ],
+      "bar" : { "c" : true }
+    }
+    return $a.bar.c
+    
+    let $a := {
+      "foo" : [ { "a" : 1, "b": 2 } ],
+      "bar" : { "c" : true }
+    }
+    return $a.foo[[1]].b
+    
+
+Any JSONiq expression can be dynamically put in lieu of a key or value. The result of that expression will be taken to create the JSON object:
+
+    {
+      string-join(("One", "Two"), "-") : [ 1 to 100]
+      string-join(("One", "Two", "Three"), "-") : [ 1 to 100]
+    }
+    
+As expected, an error will be raised if the expression used for a key does not return a single atomic item (which gets converted to a string implicitly). If the expression used for a value returns an empty sequence, then null is used as the value. If it returns a sequence of more than one item, it gets boxed inside an array, which is used as the value.
+
+Objects can be updated in place using the JSONiq update facility and JSONiq scripting statements:
+
+    variable $x as array := { "foo" : "bar" };
+    insert json { "bar" : true, "foobar" : 20 } into $x;
+    delete json $x.foo;
+    replace value of json $x.bar with false;
+    $x
+
