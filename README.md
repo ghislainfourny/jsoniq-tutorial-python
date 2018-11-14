@@ -267,7 +267,7 @@ Items can be looked up in an object with a dot, like in Python:
 Any JSONiq expression can be dynamically put in lieu of a key or value. The result of that expression will be taken to create the JSON object:
 
     {
-      string-join(("One", "Two"), "-") : [ 1 to 100]
+      string-join(("One", "Two"), "-") : [ 1 to 100],
       string-join(("One", "Two", "Three"), "-") : [ 1 to 100]
     }
     
