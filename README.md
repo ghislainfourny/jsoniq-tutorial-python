@@ -240,13 +240,13 @@ Arrays are surrounded with curly braces, like in JSON -- actually, any well-form
     
 Items can be looked up in an object with a dot, like in Python:
 
-    let $a := {
+    let $a as object := {
       "foo" : [ { "a" : 1, "b": 2 } ],
       "bar" : { "c" : true }
     }
     return $a.bar.c
     
-    let $a := {
+    let $a as object := {
       "foo" : [ { "a" : 1, "b": 2 } ],
       "bar" : { "c" : true }
     }
@@ -264,7 +264,7 @@ As expected, an error will be raised if the expression used for a key does not r
 
 Objects can be updated in place using the JSONiq update facility and JSONiq scripting statements:
 
-    variable $x as array := { "foo" : "bar" };
+    variable $x as object := { "foo" : "bar" };
     insert json { "bar" : true, "foobar" : 20 } into $x;
     delete json $x.foo;
     replace value of json $x.bar with false;
