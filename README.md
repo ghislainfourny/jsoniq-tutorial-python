@@ -216,6 +216,17 @@ Conversely, arrays can be "unboxed" to sequences with [] like so:
     let $y as integer+ := $x[]
     return $y
     
+It is also possible to instead use the built-in function members():
+    
+    let $x as array := [1, 2, 3, 4, 5, 6]
+    let $y as integer+ := members($x)
+    return $y
+
+The builtin function size() returns the length of an array
+
+    let $x as array := [1, 2, 3, 4, 5, 6]
+    return size($x)
+
 Arrays can be updated in place using the JSONiq update facility and JSONiq scripting statements:
 
     variable $x as array := [1, 2, 3, 4, 5, 6];
@@ -261,6 +272,11 @@ Any JSONiq expression can be dynamically put in lieu of a key or value. The resu
     }
     
 As expected, an error will be raised if the expression used for a key does not return a single atomic item (which gets converted to a string implicitly). If the expression used for a value returns an empty sequence, then null is used as the value. If it returns a sequence of more than one item, it gets boxed inside an array, which is used as the value.
+
+The builtin function keys() returns the keys of an object:
+
+    let $x as object := { "foo" : true, "bar" : [ 1, 2, 3 ] }
+    return keys($x)
 
 Objects can be updated in place using the JSONiq update facility and JSONiq scripting statements:
 
