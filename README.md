@@ -28,7 +28,7 @@ Number types can be processed together at will, as conversions are automatically
 
 ### Variable declaration and assignment (JSONiq Scripting feature)
 
-Warning: Sparksoniq does *not* support the Scripting feature. Use let clauses instead (scroll down).
+Warning: Rumble does *not* support the Scripting feature. Use let clauses instead (scroll down).
 
 Variables can be declared, initialized and subsequently assigned new values. A difference with Python is that variable names start with a dollar sign. Another is that JSONiq statements end with semi-colons, like in Java or C++.
 
